@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.1
+
+- fixed the GitHub release workflow so reruns and pre-existing releases no longer fail with `Release.tag_name already exists`
+- made the release job idempotent by falling back from `create` to `edit` when the release already exists
+
 ## v1.0.0
 
 - first public usable release
