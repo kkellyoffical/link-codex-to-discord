@@ -1,11 +1,13 @@
 # Changelog
 
-## Unreleased
+## v1.0.0
 
+- first public usable release
 - repository now ships a deployable `dist/daemon.mjs` runtime instead of only a public scaffold
 - added real daemon and supervisor scripts for macOS, Linux, and Windows
 - added `config.env.example` aligned with the live bridge runtime
 - updated deployment guidance so a fresh clone can be configured and started directly
+- added an AI-agent deployment guide for Codex, Claude Code, and similar agents
 
 ## v0.3.0
 

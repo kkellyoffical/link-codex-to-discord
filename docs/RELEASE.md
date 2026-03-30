@@ -9,8 +9,8 @@ This repository is set up for tag-based GitHub Releases.
 3. Create a semantic version tag:
 
 ```bash
-git tag -a v0.1.0 -m "v0.1.0"
-git push origin v0.1.0
+git tag -a v1.0.0 -m "v1.0.0"
+git push origin v1.0.0
 ```
 
 4. Let the GitHub Actions workflow create the Release entry.
@@ -20,18 +20,18 @@ git push origin v0.1.0
 If you want to create a release manually:
 
 ```bash
-gh release create v0.1.0 \
-  --title "v0.1.0" \
+gh release create v1.0.0 \
+  --title "v1.0.0" \
   --generate-notes
 ```
 
 If you need to attach files:
 
 ```bash
-gh release create v0.1.0 \
+gh release create v1.0.0 \
   ./path/to/asset1.zip \
   ./path/to/asset2.tar.gz \
-  --title "v0.1.0" \
+  --title "v1.0.0" \
   --generate-notes
 ```
 
@@ -61,7 +61,7 @@ Do not include:
 
 - use tags only for versions you are willing to support
 - prefer one release note per version tag
-- keep pre-release tags explicit, for example `v0.2.0-beta.1`
+- keep pre-release tags explicit, for example `v1.1.0-beta.1`
 
 ## Official references
 
@@ -71,4 +71,3 @@ Do not include:
   https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
 - GitHub CLI manual, `gh release create`:
   https://cli.github.com/manual/gh_release_create
-

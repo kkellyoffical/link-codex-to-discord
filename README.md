@@ -78,6 +78,14 @@ bash scripts/daemon.sh status
 bash scripts/daemon.sh logs 100
 ```
 
+## AI agent deployment
+
+For AI agents such as `Codex`, `Claude Code`, or similar terminal agents, use:
+
+- [docs/AI_AGENT_DEPLOYMENT.md](./docs/AI_AGENT_DEPLOYMENT.md)
+
+That guide is written as a deterministic deployment runbook an agent can execute step by step.
+
 ## Deployment notes
 
 - The public repository is now deployable from a fresh clone.

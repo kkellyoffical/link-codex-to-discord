@@ -1,28 +1,22 @@
 # Roadmap
 
-## v0.2.x
+## Completed by v1.0.0
 
-- publish the initial public repository
-- add deploy templates for `systemd` and `launchd`
-- document the Discord bot permission model
-- document release operations and security handling
+- published the initial public repository
+- shipped deploy templates for `systemd` and `launchd`
+- documented the Discord bot permission model
+- documented panel-style `/status` rendering
+- documented terminal-native `/compact` behavior
+- documented simplified `Tool Activity` and `Code Changes` summaries
+- documented per-turn code-change accounting limits
+- shipped a deployable runtime bundle in the public repo
+- shipped daemon and supervisor scripts in the public repo
+- aligned public deployment docs with the real runtime layout
+- validated fresh-clone install and runtime syntax checks
 
-## v0.3.x
+## Post-1.0
 
-- document panel-style `/status` rendering
-- document terminal-native `/compact` behavior
-- document simplified `Tool Activity` and `Code Changes` summaries
-- document per-turn code-change accounting limits
-
-## v0.4.x
-
-- ship a deployable runtime bundle in the public repo
-- ship daemon and supervisor scripts in the public repo
-- align public deployment docs with the real runtime layout
-
-## v1.0.x
-
-- stabilize public interfaces
-- ship supervisor examples
-- add integration tests and smoke checks
-- publish a production deployment guide
+- add integration tests and smoke checks that run in CI
+- add packaged service-install helpers for macOS and Linux
+- separate Discord-specific deployment docs from multi-runtime docs
+- document upgrade paths between runtime bundle versions

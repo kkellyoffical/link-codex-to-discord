@@ -1,6 +1,6 @@
 {
   "name": "link-codex-to-discord",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Deployable Discord bridge daemon for Codex and Claude Code",
   "license": "MIT",
   "type": "module",
@@ -35,9 +35,7 @@
     "config.env.example"
   ],
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.2.62"
-  },
-  "optionalDependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.62",
     "@openai/codex-sdk": "^0.110.0"
   }
 }
