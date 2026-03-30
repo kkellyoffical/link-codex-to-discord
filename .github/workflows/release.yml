@@ -36,9 +36,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.tag.outputs.value }}
+          REPO: ${{ github.repository }}
         run: |
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release edit "$TAG" --latest=false
+          if gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1; then
+            gh release edit "$TAG" --repo "$REPO" --latest=false
           else
-            gh release create "$TAG" --title "$TAG" --generate-notes
+            if ! gh release create "$TAG" --repo "$REPO" --title "$TAG" --generate-notes; then
+              gh release edit "$TAG" --repo "$REPO" --latest=false
+            fi
           fi
