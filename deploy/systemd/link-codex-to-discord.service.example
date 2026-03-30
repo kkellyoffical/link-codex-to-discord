@@ -1,0 +1,15 @@
+[Unit]
+Description=Link Codex To Discord
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/link-codex-to-discord
+EnvironmentFile=/opt/link-codex-to-discord/.env
+ExecStart=/usr/bin/env node /opt/link-codex-to-discord/src/index.js
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

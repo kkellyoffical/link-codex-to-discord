@@ -2,9 +2,10 @@
 
 Sanitized deployment and release documentation for operating a Discord-to-Codex bridge.
 
-This repository is intentionally documentation-first. It contains:
+This repository is a sanitized open-source scaffold. It contains:
 
 - deployment guidance for running the Discord bridge on a private host
+- a minimal Node.js project skeleton
 - environment variable templates with placeholders only
 - release and versioning guidance
 - a minimal GitHub Actions workflow for tag-based GitHub Releases
@@ -18,8 +19,10 @@ It does not contain:
 
 ## Repository layout
 
+- `src/`: minimal public project skeleton
 - `docs/DEPLOYMENT.md`: host setup, configuration, launch, health checks
 - `docs/ARCHITECTURE.md`: component diagram and runtime behavior
+- `docs/ROADMAP.md`: planned milestones
 - `docs/RELEASE.md`: how to publish releases safely
 - `SECURITY.md`: security and disclosure notes
 - `CHANGELOG.md`: release history
@@ -42,8 +45,32 @@ Discord
 
 1. Read [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md).
 2. Copy `.env.example` to `.env` and fill in your own values.
-3. Start the daemon under a supervisor such as `launchd` or `systemd`.
-4. Run health checks before inviting the bot into a production Discord server.
+3. Run the scaffold locally:
+
+```bash
+npm run check
+npm start
+```
+
+4. Adapt the scaffold to your real Discord adapter and Codex runtime.
+5. Start the daemon under a supervisor such as `launchd` or `systemd`.
+6. Run health checks before inviting the bot into a production Discord server.
+
+## Project status
+
+Current scope:
+
+- safe public documentation
+- release workflow
+- deploy templates
+- minimal scaffold for future implementation
+
+Not yet included:
+
+- production bot runtime
+- live token handling
+- host-specific supervisor wiring
+- private operational data
 
 ## Release model
 
@@ -58,6 +85,7 @@ Recommended release trigger:
 - let GitHub Actions create the Release entry automatically
 
 See [docs/RELEASE.md](./docs/RELEASE.md) for the full workflow.
+See [docs/ROADMAP.md](./docs/ROADMAP.md) for planned milestones.
 
 ## Security notes
 
