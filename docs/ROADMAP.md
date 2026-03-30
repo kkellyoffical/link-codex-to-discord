@@ -2,7 +2,7 @@
 
 ## v0.2.x
 
-- publish a clean open-source scaffold
+- publish the initial public repository
 - add deploy templates for `systemd` and `launchd`
 - document the Discord bot permission model
 - document release operations and security handling
@@ -16,10 +16,9 @@
 
 ## v0.4.x
 
-- add a real Discord adapter implementation
-- add session binding persistence
-- add command isolation for `/status`, `/compact`, and `/stop`
-- add image-input support documentation
+- ship a deployable runtime bundle in the public repo
+- ship daemon and supervisor scripts in the public repo
+- align public deployment docs with the real runtime layout
 
 ## v1.0.x
 

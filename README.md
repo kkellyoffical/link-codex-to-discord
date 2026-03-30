@@ -1,117 +1,96 @@
 # Link Codex To Discord
 
-Sanitized deployment and release documentation for operating a Discord-to-Codex bridge.
+Deployable Discord bridge daemon for `Codex` and `Claude Code`.
 
-This repository is a sanitized open-source scaffold. It contains:
+This repository now includes the runtime files needed to deploy a working bridge:
 
-- deployment guidance for running the Discord bridge on a private host
-- a minimal Node.js project skeleton
-- documentation for the current Discord bridge UX model
-- environment variable templates with placeholders only
-- release and versioning guidance
-- a minimal GitHub Actions workflow for tag-based GitHub Releases
+- `dist/daemon.mjs`: bundled daemon runtime
+- `scripts/daemon.sh`: start/stop/status/logs entrypoint
+- `scripts/doctor.sh`: environment and auth diagnostics
+- `scripts/supervisor-*.sh|ps1`: macOS, Linux, and Windows supervisors
+- `config.env.example`: real runtime configuration template
+- deployment docs, release docs, and service templates
 
-It does not contain:
+It still does **not** include:
 
-- personal tokens
+- live bot tokens
 - Discord user, guild, or channel IDs
 - local absolute machine paths
 - private account metadata
 
 ## Repository layout
 
-- `src/`: minimal public project skeleton
-- `docs/DEPLOYMENT.md`: host setup, configuration, launch, health checks
-- `docs/ARCHITECTURE.md`: component diagram and runtime behavior
+- `dist/`: deployable bundled runtime
+- `scripts/`: daemon management, diagnostics, supervisors
+- `docs/DEPLOYMENT.md`: end-to-end deployment steps
+- `docs/ARCHITECTURE.md`: runtime behavior and data sources
 - `docs/ROADMAP.md`: planned milestones
-- `docs/RELEASE.md`: how to publish releases safely
-- `SECURITY.md`: security and disclosure notes
-- `CHANGELOG.md`: release history
-- `LICENSE`: repository license
-- `.env.example`: sanitized configuration template
-- `.github/workflows/release.yml`: create a GitHub Release from a version tag
-
-## Intended architecture
-
-```text
-Discord
-  -> Bot Token / Slash Commands
-  -> Bridge Daemon
-  -> Local Codex runtime
-     -> tmux-backed interactive terminal for terminal-native commands
-     -> local state files for status and audit
-```
+- `docs/RELEASE.md`: safe release workflow
+- `config.env.example`: sanitized runtime config template
+- `deploy/`: launchd/systemd examples
 
 ## Quick start
 
-1. Read [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md).
-2. Copy `.env.example` to `.env` and fill in your own values.
-3. Run the scaffold locally:
+1. Install prerequisites:
+   - Node.js >= 20
+   - `tmux`
+   - `codex` CLI and/or `claude` CLI
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create runtime config:
+
+```bash
+mkdir -p ~/.claude-to-im
+cp config.env.example ~/.claude-to-im/config.env
+```
+
+4. Edit `~/.claude-to-im/config.env` and set at minimum:
+   - `CTI_RUNTIME=codex` or `claude`
+   - `CTI_ENABLED_CHANNELS=discord`
+   - `CTI_DEFAULT_WORKDIR=/absolute/path/to/your/project`
+   - `CTI_DISCORD_BOT_TOKEN=...`
+   - `CTI_DISCORD_ALLOWED_USERS=...`
+   - `CTI_DISCORD_ALLOWED_GUILDS=...`
+   - `CTI_DISCORD_ALLOWED_CHANNELS=...`
+
+5. Check the runtime:
 
 ```bash
 npm run check
-npm start
+bash scripts/doctor.sh
 ```
 
-4. Adapt the scaffold to your real Discord adapter and Codex runtime.
-5. Start the daemon under a supervisor such as `launchd` or `systemd`.
-6. Run health checks before inviting the bot into a production Discord server.
+6. Start the bridge:
 
-## Project status
+```bash
+bash scripts/daemon.sh start
+```
 
-Current scope:
+7. Inspect status and logs:
 
-- safe public documentation
-- release workflow
-- deploy templates
-- minimal scaffold for future implementation
-- documented live bridge behavior for:
-  - `/status` with local state reads and panel-style rendering
-  - `/compact` with terminal-native execution semantics
-  - tail summaries for `Tool Activity` and `Code Changes`
+```bash
+bash scripts/daemon.sh status
+bash scripts/daemon.sh logs 100
+```
 
-Not yet included:
+## Deployment notes
 
-- production bot runtime
-- live token handling
-- host-specific supervisor wiring
-- private operational data
+- The public repository is now deployable from a fresh clone.
+- The bundled runtime in `dist/daemon.mjs` is the deployable artifact.
+- `Codex` features such as `/status`, `/compact`, `/permissions`, and `/yolo` depend on local CLI auth and local session state.
+- For production use, prefer the provided `launchd` or `systemd` examples over ad-hoc terminal launches.
 
-## Current UX direction
-
-- `/status` should read fast local state and render as a compact status panel.
-- `/compact` should prefer terminal-native behavior when matching Codex TUI semantics matters.
-- post-run summaries should stay short in-channel and move full detail into attachments or logs.
-- code-change counts should be derived from per-turn file snapshots, not whole-worktree diffs.
-
-## Release model
-
-Recommended versioning:
-
-- `v0.x.y` while the system is still changing frequently
-- `v1.x.y` once command behavior and deployment layout are stable
-
-Recommended release trigger:
-
-- push a signed or annotated tag such as `v0.3.0`
-- let GitHub Actions create the Release entry automatically
-
-See [docs/RELEASE.md](./docs/RELEASE.md) for the full workflow.
-See [docs/ROADMAP.md](./docs/ROADMAP.md) for planned milestones.
+See [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md) for the full setup.
+See [docs/RELEASE.md](./docs/RELEASE.md) for the release workflow.
 
 ## Security notes
 
-- Never commit live `.env` files.
-- Never embed raw Discord IDs or personal paths in screenshots or logs.
-- Treat audit logs and session metadata as sensitive operational data.
-- Keep operational secrets and host-specific supervisor files outside the repository.
-
-## Public release readiness
-
-This repository has been prepared for public release as a documentation and deployment guide.
-It has been checked to avoid embedding:
-
-- live bot tokens
-- personal email addresses
-- host-local absolute paths
-- user, guild, or channel IDs
+- Never commit `config.env`.
+- Never paste real bot tokens into issues or logs.
+- Treat bridge audit logs and Codex session metadata as sensitive data.
+- Re-check screenshots and pasted terminal output before sharing publicly.

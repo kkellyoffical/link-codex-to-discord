@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- repository now ships a deployable `dist/daemon.mjs` runtime instead of only a public scaffold
+- added real daemon and supervisor scripts for macOS, Linux, and Windows
+- added `config.env.example` aligned with the live bridge runtime
+- updated deployment guidance so a fresh clone can be configured and started directly
+
 ## v0.3.0
 
 - documented the now-working `/status` and `/compact` behavior for the Discord bridge runtime

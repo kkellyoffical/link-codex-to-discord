@@ -2,9 +2,8 @@
 .env
 .env.local
 .env.*.local
+config.env
 *.log
 tmp/
-dist/
 node_modules/
 coverage/
-

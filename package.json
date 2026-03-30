@@ -1,7 +1,7 @@
 {
   "name": "link-codex-to-discord",
-  "version": "0.3.0",
-  "description": "Sanitized open-source scaffold for linking a Discord bot to a local Codex runtime",
+  "version": "0.4.0",
+  "description": "Deployable Discord bridge daemon for Codex and Claude Code",
   "license": "MIT",
   "type": "module",
   "private": false,
@@ -9,8 +9,10 @@
     "node": ">=20"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "check": "node --check src/index.js && node --check src/config.js && node --check src/bridge.js",
+    "start": "node dist/daemon.mjs",
+    "check": "node --check dist/daemon.mjs",
+    "daemon": "bash scripts/daemon.sh",
+    "doctor": "bash scripts/doctor.sh",
     "release:dry-run": "npm pack --dry-run"
   },
   "keywords": [
@@ -18,16 +20,24 @@
     "discord",
     "bridge",
     "tmux",
-    "operations"
+    "operations",
+    "claude-code"
   ],
   "files": [
-    "src",
+    "dist",
     "docs",
+    "scripts",
     "deploy",
     "README.md",
     "CHANGELOG.md",
     "SECURITY.md",
     "LICENSE",
-    ".env.example"
-  ]
+    "config.env.example"
+  ],
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.62"
+  },
+  "optionalDependencies": {
+    "@openai/codex-sdk": "^0.110.0"
+  }
 }
