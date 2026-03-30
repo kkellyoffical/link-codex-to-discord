@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.0
+
+- documented the now-working `/status` and `/compact` behavior for the Discord bridge runtime
+- documented panel-style status rendering for session, usage, rate limits, and account state
+- documented simplified tail summaries for `Tool Activity` and `Code Changes`
+- clarified that code-change statistics are based on per-turn `Edit` snapshots rather than whole-worktree diffs
+- refreshed roadmap and architecture notes to match the current bridge behavior
+
 ## v0.2.0
 
 - added a minimal public Node.js scaffold under `src/`

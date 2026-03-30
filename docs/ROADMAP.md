@@ -9,16 +9,17 @@
 
 ## v0.3.x
 
+- document panel-style `/status` rendering
+- document terminal-native `/compact` behavior
+- document simplified `Tool Activity` and `Code Changes` summaries
+- document per-turn code-change accounting limits
+
+## v0.4.x
+
 - add a real Discord adapter implementation
 - add session binding persistence
 - add command isolation for `/status`, `/compact`, and `/stop`
 - add image-input support documentation
-
-## v0.4.x
-
-- add tmux-backed compact and status execution helpers
-- add stronger completion detection for terminal-native commands
-- add structured operational logs
 
 ## v1.0.x
 

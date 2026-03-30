@@ -1,6 +1,6 @@
 {
   "name": "link-codex-to-discord",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Sanitized open-source scaffold for linking a Discord bot to a local Codex runtime",
   "license": "MIT",
   "type": "module",

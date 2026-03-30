@@ -6,6 +6,7 @@ This repository is a sanitized open-source scaffold. It contains:
 
 - deployment guidance for running the Discord bridge on a private host
 - a minimal Node.js project skeleton
+- documentation for the current Discord bridge UX model
 - environment variable templates with placeholders only
 - release and versioning guidance
 - a minimal GitHub Actions workflow for tag-based GitHub Releases
@@ -64,6 +65,10 @@ Current scope:
 - release workflow
 - deploy templates
 - minimal scaffold for future implementation
+- documented live bridge behavior for:
+  - `/status` with local state reads and panel-style rendering
+  - `/compact` with terminal-native execution semantics
+  - tail summaries for `Tool Activity` and `Code Changes`
 
 Not yet included:
 
@@ -71,6 +76,13 @@ Not yet included:
 - live token handling
 - host-specific supervisor wiring
 - private operational data
+
+## Current UX direction
+
+- `/status` should read fast local state and render as a compact status panel.
+- `/compact` should prefer terminal-native behavior when matching Codex TUI semantics matters.
+- post-run summaries should stay short in-channel and move full detail into attachments or logs.
+- code-change counts should be derived from per-turn file snapshots, not whole-worktree diffs.
 
 ## Release model
 
