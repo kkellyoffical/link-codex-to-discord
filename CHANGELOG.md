@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.0.2
 
 - added an interactive directory picker for `/new` when no path is supplied
 - added an interactive directory picker for `/cwd` when no path is supplied
