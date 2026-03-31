@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- added an interactive directory picker for `/new` when no path is supplied
+- added an interactive directory picker for `/cwd` when no path is supplied
+- replaced low-level `os error 2` failures with a clearer “working directory is unavailable” message
+
 ## v1.0.1
 
 - fixed the GitHub release workflow so reruns and pre-existing releases no longer fail with `Release.tag_name already exists`
