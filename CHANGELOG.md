@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.3
+
+- replaced the old common-directory pickers with hierarchical directory browsers for `/new` and `/cwd`, starting from `/` and supporting up/home/confirm/cancel flows
+- added in-browser folder creation for the directory browsers
+- added `/log` with selector-based output detail levels: `simple`, `verbose`, and `debug`
+- changed in-flight follow-up messages from silent blocking to explicit queueing, with immediate acknowledgement and automatic next-turn execution after the current turn finishes
+
 ## v1.0.2
 
 - added an interactive directory picker for `/new` when no path is supplied
