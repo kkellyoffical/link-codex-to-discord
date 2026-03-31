@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.4
+
+- fixed `/new` so creating a new session now clears the previous native thread binding instead of accidentally continuing the old context
+- trimmed legacy Discord slash commands from the command picker after newer interactive flows replaced them
+- re-verified the `/resume` selector and confirmation flow against the current runtime behavior
+
 ## v1.0.3
 
 - replaced the old common-directory pickers with hierarchical directory browsers for `/new` and `/cwd`, starting from `/` and supporting up/home/confirm/cancel flows
