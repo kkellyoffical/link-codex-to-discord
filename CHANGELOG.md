@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.5
+
+- expanded `/log` into four output levels: `simple`, `medium`, `verbose`, and `debug`
+- changed `simple` to keep a minimal final summary instead of showing only the final answer
+- added `medium` mode for task-stage progress without detailed logs
+- improved in-flight follow-up feedback with explicit queue acknowledgement before the next turn runs
+
 ## v1.0.4
 
 - fixed `/new` so creating a new session now clears the previous native thread binding instead of accidentally continuing the old context
