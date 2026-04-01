@@ -1,0 +1,69 @@
+<svg width="1600" height="720" viewBox="0 0 1600 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="112" y1="72" x2="1474" y2="648" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="0.55" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#082F49"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="274" y1="190" x2="1269" y2="559" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="0.45" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#34D399"/>
+    </linearGradient>
+    <radialGradient id="orbA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1342 120) rotate(135) scale(432 299)">
+      <stop stop-color="#22D3EE" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orbB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(312 608) rotate(-18) scale(492 264)">
+      <stop stop-color="#34D399" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="panelShadow" x="732" y="136" width="624" height="404" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#020617" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="720" rx="44" fill="url(#bg)"/>
+  <rect x="28" y="28" width="1544" height="664" rx="32" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+  <circle cx="1342" cy="120" r="280" fill="url(#orbA)"/>
+  <circle cx="274" cy="632" r="264" fill="url(#orbB)"/>
+
+  <g opacity="0.14">
+    <path d="M0 528C296 460 404 242 661 242C927 242 1014 492 1600 356" stroke="#67E8F9" stroke-width="2"/>
+    <path d="M0 602C242 548 470 302 742 302C999 302 1134 540 1600 470" stroke="#A7F3D0" stroke-width="2"/>
+  </g>
+
+  <g>
+    <text x="112" y="184" fill="#E2E8F0" font-size="36" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" letter-spacing="0.32em">LINK CODEX TO DISCORD</text>
+    <text x="112" y="292" fill="#F8FAFC" font-size="104" font-weight="700" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Codex-first</text>
+    <text x="112" y="396" fill="#F8FAFC" font-size="104" font-weight="700" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Discord Runtime</text>
+    <text x="112" y="468" fill="#94A3B8" font-size="34" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Native app-server compact. Session-aware controls. Production-minded bridge operations.</text>
+
+    <rect x="112" y="534" width="276" height="74" rx="37" fill="#E2E8F0" fill-opacity="0.08" stroke="#E2E8F0" stroke-opacity="0.12"/>
+    <text x="150" y="581" fill="#E2E8F0" font-size="30" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Codex + Discord</text>
+
+    <rect x="408" y="534" width="256" height="74" rx="37" fill="#67E8F9" fill-opacity="0.14" stroke="#67E8F9" stroke-opacity="0.22"/>
+    <text x="448" y="581" fill="#CCFBF1" font-size="30" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">launchd ready</text>
+  </g>
+
+  <g filter="url(#panelShadow)">
+    <rect x="764" y="168" width="560" height="348" rx="28" fill="#020617" fill-opacity="0.76" stroke="#334155" stroke-width="2"/>
+    <rect x="792" y="200" width="504" height="200" rx="18" fill="#0B1220" stroke="#1E293B" stroke-width="2"/>
+    <circle cx="826" cy="228" r="7" fill="#FB7185"/>
+    <circle cx="850" cy="228" r="7" fill="#FBBF24"/>
+    <circle cx="874" cy="228" r="7" fill="#34D399"/>
+
+    <path d="M846 314L916 256" stroke="url(#glow)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1242 314L1172 256" stroke="url(#glow)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M938 368H1144" stroke="#F8FAFC" stroke-width="18" stroke-linecap="round"/>
+
+    <rect x="792" y="434" width="154" height="44" rx="22" fill="#0EA5E9" fill-opacity="0.16" stroke="#38BDF8" stroke-opacity="0.32"/>
+    <text x="826" y="463" fill="#BAE6FD" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">/status</text>
+
+    <rect x="964" y="434" width="182" height="44" rx="22" fill="#14B8A6" fill-opacity="0.14" stroke="#34D399" stroke-opacity="0.28"/>
+    <text x="1002" y="463" fill="#D1FAE5" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">/compact</text>
+
+    <rect x="1162" y="434" width="134" height="44" rx="22" fill="#E2E8F0" fill-opacity="0.08" stroke="#E2E8F0" stroke-opacity="0.16"/>
+    <text x="1194" y="463" fill="#E2E8F0" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">/log</text>
+  </g>
+</svg>
