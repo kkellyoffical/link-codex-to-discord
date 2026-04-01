@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.1.0
+
+- reworked `/compact` to prefer a dedicated tmux target per Discord chat, reusing the same native Codex terminal instead of always launching a fresh isolated tmux session
+- added `tmuxTarget` lifecycle to chat bindings so `/new`, `/resume`, and native-thread changes clear stale compact terminals instead of risking context bleed
+- kept `/compact` safe with an isolated-tmux fallback when the dedicated terminal cannot be prepared
+- exposed the current compact terminal binding in `/status` as `Compact tmux` for easier runtime verification
+
 ## v1.0.5
 
 - expanded `/log` into four output levels: `simple`, `medium`, `verbose`, and `debug`

@@ -91,6 +91,7 @@ That guide is written as a deterministic deployment runbook an agent can execute
 - The public repository is now deployable from a fresh clone.
 - The bundled runtime in `dist/daemon.mjs` is the deployable artifact.
 - `Codex` features such as `/status`, `/compact`, `/permissions`, and `/yolo` depend on local CLI auth and local session state.
+- `/compact` uses a dedicated tmux target per Discord chat when possible, with an isolated fallback to avoid cross-session context bleed.
 - For production use, prefer the provided `launchd` or `systemd` examples over ad-hoc terminal launches.
 
 See [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md) for the full setup.
