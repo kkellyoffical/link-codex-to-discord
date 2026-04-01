@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.0
+
+- moved `/compact` off tmux injection and onto native Codex app-server compaction, removing the detached tmux dependency from the main compact path
+- pinned the runtime to the intended Codex executable path and aligned the live bridge with the updated local Codex installation
+- rebranded the runtime, launchd label, scripts, docs, and default project home around `link-codex-to-discord`
+- added acknowledgements in the README for the upstream projects that informed the current system
+
 ## v1.1.0
 
 - reworked `/compact` to prefer a dedicated tmux target per Discord chat, reusing the same native Codex terminal instead of always launching a fresh isolated tmux session
