@@ -2,9 +2,11 @@
 # macOS supervisor — launchd-based process management.
 # Sourced by daemon.sh; expects CTI_HOME, SKILL_DIR, PID_FILE, STATUS_FILE, LOG_FILE.
 
-LAUNCHD_LABEL="com.claude-to-im.bridge"
+LAUNCHD_LABEL="com.link-codex-to-discord"
+LEGACY_LAUNCHD_LABEL="com.claude-to-im.bridge"
 PLIST_DIR="$HOME/Library/LaunchAgents"
 PLIST_FILE="$PLIST_DIR/$LAUNCHD_LABEL.plist"
+LEGACY_PLIST_FILE="$PLIST_DIR/$LEGACY_LAUNCHD_LABEL.plist"
 
 # ── launchd helpers ──
 
@@ -110,27 +112,36 @@ PLIST
 # ── Public interface (called by daemon.sh) ──
 
 supervisor_start() {
+  launchctl bootout "gui/$(id -u)/$LEGACY_LAUNCHD_LABEL" 2>/dev/null || true
   launchctl bootout "gui/$(id -u)/$LAUNCHD_LABEL" 2>/dev/null || true
+  rm -f "$LEGACY_PLIST_FILE"
   generate_plist
   launchctl bootstrap "gui/$(id -u)" "$PLIST_FILE"
   launchctl kickstart -k "gui/$(id -u)/$LAUNCHD_LABEL"
 }
 
 supervisor_stop() {
+  launchctl bootout "gui/$(id -u)/$LEGACY_LAUNCHD_LABEL" 2>/dev/null || true
   launchctl bootout "gui/$(id -u)/$LAUNCHD_LABEL" 2>/dev/null || true
   rm -f "$PID_FILE"
 }
 
 supervisor_is_managed() {
-  launchctl print "gui/$(id -u)/$LAUNCHD_LABEL" &>/dev/null
+  launchctl print "gui/$(id -u)/$LAUNCHD_LABEL" &>/dev/null || launchctl print "gui/$(id -u)/$LEGACY_LAUNCHD_LABEL" &>/dev/null
 }
 
 supervisor_status_extra() {
-  if supervisor_is_managed; then
-    echo "Bridge is registered with launchd ($LAUNCHD_LABEL)"
+  local label=""
+  if launchctl print "gui/$(id -u)/$LAUNCHD_LABEL" &>/dev/null; then
+    label="$LAUNCHD_LABEL"
+  elif launchctl print "gui/$(id -u)/$LEGACY_LAUNCHD_LABEL" &>/dev/null; then
+    label="$LEGACY_LAUNCHD_LABEL"
+  fi
+  if [ -n "$label" ]; then
+    echo "Bridge is registered with launchd ($label)"
     # Extract PID from launchctl as the authoritative source
     local lc_pid
-    lc_pid=$(launchctl print "gui/$(id -u)/$LAUNCHD_LABEL" 2>/dev/null | grep -m1 'pid = ' | sed 's/.*pid = //' | tr -d ' ')
+    lc_pid=$(launchctl print "gui/$(id -u)/$label" 2>/dev/null | grep -m1 'pid = ' | sed 's/.*pid = //' | tr -d ' ')
     if [ -n "$lc_pid" ] && [ "$lc_pid" != "0" ] && [ "$lc_pid" != "-" ]; then
       echo "launchd reports PID: $lc_pid"
     fi
@@ -140,9 +151,15 @@ supervisor_status_extra() {
 # Override: on macOS, check launchctl first, then fall back to PID file
 supervisor_is_running() {
   # Primary: launchctl knows the process
-  if supervisor_is_managed; then
+  local label=""
+  if launchctl print "gui/$(id -u)/$LAUNCHD_LABEL" &>/dev/null; then
+    label="$LAUNCHD_LABEL"
+  elif launchctl print "gui/$(id -u)/$LEGACY_LAUNCHD_LABEL" &>/dev/null; then
+    label="$LEGACY_LAUNCHD_LABEL"
+  fi
+  if [ -n "$label" ]; then
     local lc_pid
-    lc_pid=$(launchctl print "gui/$(id -u)/$LAUNCHD_LABEL" 2>/dev/null | grep -m1 'pid = ' | sed 's/.*pid = //' | tr -d ' ')
+    lc_pid=$(launchctl print "gui/$(id -u)/$label" 2>/dev/null | grep -m1 'pid = ' | sed 's/.*pid = //' | tr -d ' ')
     if [ -n "$lc_pid" ] && [ "$lc_pid" != "0" ] && [ "$lc_pid" != "-" ]; then
       return 0
     fi

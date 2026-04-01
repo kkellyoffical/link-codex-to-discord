@@ -45,11 +45,11 @@ Only grant additional permissions if your bridge features actually need them.
 Create the bridge home and config:
 
 ```bash
-mkdir -p ~/.claude-to-im
-cp config.env.example ~/.claude-to-im/config.env
+mkdir -p ~/.link-codex-to-discord
+cp config.env.example ~/.link-codex-to-discord/config.env
 ```
 
-Edit `~/.claude-to-im/config.env` and set at minimum:
+Edit `~/.link-codex-to-discord/config.env` and set at minimum:
 
 - `CTI_RUNTIME=codex` or `claude`
 - `CTI_ENABLED_CHANNELS=discord`

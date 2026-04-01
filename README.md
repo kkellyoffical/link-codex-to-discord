@@ -45,11 +45,11 @@ npm install
 3. Create runtime config:
 
 ```bash
-mkdir -p ~/.claude-to-im
-cp config.env.example ~/.claude-to-im/config.env
+mkdir -p ~/.link-codex-to-discord
+cp config.env.example ~/.link-codex-to-discord/config.env
 ```
 
-4. Edit `~/.claude-to-im/config.env` and set at minimum:
+4. Edit `~/.link-codex-to-discord/config.env` and set at minimum:
    - `CTI_RUNTIME=codex` or `claude`
    - `CTI_ENABLED_CHANNELS=discord`
    - `CTI_DEFAULT_WORKDIR=/absolute/path/to/your/project`
@@ -96,6 +96,16 @@ That guide is written as a deterministic deployment runbook an agent can execute
 
 See [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md) for the full setup.
 See [docs/RELEASE.md](./docs/RELEASE.md) for the release workflow.
+
+## Acknowledgements
+
+This project builds on ideas and prior work from several upstreams:
+
+- [`op7418/claude-to-im`](https://github.com/op7418/claude-to-im) for the original IM bridge foundation and operational patterns
+- [OpenAI Codex CLI / Codex SDK](https://github.com/openai/codex) for the Codex runtime and app-server interfaces
+- [discord.js](https://discord.js.org/) and the Discord platform for the bot interaction layer
+
+`link-codex-to-discord` now evolves as its own Codex-first Discord runtime, but these upstream projects made the current system possible.
 
 ## Security notes
 

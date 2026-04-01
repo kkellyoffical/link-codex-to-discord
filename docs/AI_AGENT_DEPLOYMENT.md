@@ -7,7 +7,7 @@ Use this runbook when an AI agent such as `Codex`, `Claude Code`, or another ter
 Deploy `link-codex-to-discord` on the current machine and leave it in a state where:
 
 - dependencies are installed
-- runtime config exists at `~/.claude-to-im/config.env`
+- runtime config exists at `~/.link-codex-to-discord/config.env`
 - the daemon can be started with `bash scripts/daemon.sh start`
 - health checks pass far enough to confirm environment wiring
 
@@ -46,15 +46,15 @@ npm install
 ### 2. Create runtime home
 
 ```bash
-mkdir -p ~/.claude-to-im
+mkdir -p ~/.link-codex-to-discord
 ```
 
 ### 3. Create config from template
 
-If `~/.claude-to-im/config.env` does not exist:
+If `~/.link-codex-to-discord/config.env` does not exist:
 
 ```bash
-cp config.env.example ~/.claude-to-im/config.env
+cp config.env.example ~/.link-codex-to-discord/config.env
 ```
 
 ### 4. Write required config values

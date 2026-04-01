@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
-CTI_HOME="${CTI_HOME:-$HOME/.claude-to-im}"
+APP_NAME="link-codex-to-discord"
+DEFAULT_CTI_HOME="$HOME/.link-codex-to-discord"
+LEGACY_CTI_HOME="$HOME/.claude-to-im"
+if [ -n "${CTI_HOME:-}" ]; then
+  CTI_HOME="$CTI_HOME"
+elif [ -d "$DEFAULT_CTI_HOME" ] || [ ! -d "$LEGACY_CTI_HOME" ]; then
+  CTI_HOME="$DEFAULT_CTI_HOME"
+else
+  CTI_HOME="$LEGACY_CTI_HOME"
+fi
+export CTI_HOME
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PID_FILE="$CTI_HOME/runtime/bridge.pid"
 STATUS_FILE="$CTI_HOME/runtime/status.json"
@@ -127,7 +137,7 @@ case "${1:-help}" in
     # Check if already running (supervisor-aware: launchctl on macOS, PID on Linux)
     if supervisor_is_running; then
       EXISTING_PID=$(read_pid)
-      echo "Bridge already running${EXISTING_PID:+ (PID: $EXISTING_PID)}"
+      echo "$APP_NAME is already running${EXISTING_PID:+ (PID: $EXISTING_PID)}"
       cat "$STATUS_FILE" 2>/dev/null
       exit 1
     fi
@@ -137,7 +147,7 @@ case "${1:-help}" in
     [ -f "$CTI_HOME/config.env" ] && set -a && source "$CTI_HOME/config.env" && set +a
 
     clean_env
-    echo "Starting bridge..."
+    echo "Starting $APP_NAME..."
     supervisor_start
 
     # Poll for up to 10 seconds waiting for status.json to report running
@@ -156,10 +166,10 @@ case "${1:-help}" in
 
     if [ "$STARTED" = "true" ]; then
       NEW_PID=$(read_pid)
-      echo "Bridge started${NEW_PID:+ (PID: $NEW_PID)}"
+      echo "$APP_NAME started${NEW_PID:+ (PID: $NEW_PID)}"
       cat "$STATUS_FILE" 2>/dev/null
     else
-      echo "Failed to start bridge."
+      echo "Failed to start $APP_NAME."
       supervisor_is_running || echo "  Process not running."
       status_running || echo "  status.json not reporting running=true."
       show_last_exit_reason
@@ -170,12 +180,12 @@ case "${1:-help}" in
 
   stop)
     if supervisor_is_managed; then
-      echo "Stopping bridge..."
+      echo "Stopping $APP_NAME..."
       supervisor_stop
-      echo "Bridge stopped"
+      echo "$APP_NAME stopped"
     else
       PID=$(read_pid)
-      if [ -z "$PID" ]; then echo "No bridge running"; exit 0; fi
+      if [ -z "$PID" ]; then echo "No $APP_NAME process running"; exit 0; fi
       if pid_alive "$PID"; then
         kill "$PID"
         for _ in $(seq 1 10); do
@@ -183,9 +193,9 @@ case "${1:-help}" in
           sleep 1
         done
         pid_alive "$PID" && kill -9 "$PID"
-        echo "Bridge stopped"
+        echo "$APP_NAME stopped"
       else
-        echo "Bridge was not running (stale PID file)"
+        echo "$APP_NAME was not running (stale PID file)"
       fi
       rm -f "$PID_FILE"
     fi
@@ -198,16 +208,16 @@ case "${1:-help}" in
     # Process status: supervisor-aware (launchctl on macOS, PID on Linux)
     if supervisor_is_running; then
       PID=$(read_pid)
-      echo "Bridge process is running${PID:+ (PID: $PID)}"
+      echo "$APP_NAME process is running${PID:+ (PID: $PID)}"
       # Business status from status.json
       if status_running; then
-        echo "Bridge status: running"
+        echo "$APP_NAME status: running"
       else
-        echo "Bridge status: process alive but status.json not reporting running"
+        echo "$APP_NAME status: process alive but status.json not reporting running"
       fi
       cat "$STATUS_FILE" 2>/dev/null
     else
-      echo "Bridge is not running"
+      echo "$APP_NAME is not running"
       [ -f "$PID_FILE" ] && rm -f "$PID_FILE"
       show_last_exit_reason
     fi

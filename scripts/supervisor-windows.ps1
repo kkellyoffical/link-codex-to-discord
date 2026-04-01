@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Windows daemon manager for claude-to-im bridge.
+  Windows daemon manager for link-codex-to-discord.
 
 .DESCRIPTION
   Manages the bridge process on Windows.
@@ -28,7 +28,9 @@ param(
 $ErrorActionPreference = 'Stop'
 
 # ── Paths ──
-$CtiHome    = if ($env:CTI_HOME) { $env:CTI_HOME } else { Join-Path $env:USERPROFILE '.claude-to-im' }
+$PreferredCtiHome = Join-Path $env:USERPROFILE '.link-codex-to-discord'
+$LegacyCtiHome    = Join-Path $env:USERPROFILE '.claude-to-im'
+$CtiHome    = if ($env:CTI_HOME) { $env:CTI_HOME } elseif ((Test-Path $PreferredCtiHome) -or -not (Test-Path $LegacyCtiHome)) { $PreferredCtiHome } else { $LegacyCtiHome }
 $SkillDir   = Split-Path -Parent (Split-Path -Parent $PSCommandPath)
 $RuntimeDir = Join-Path $CtiHome 'runtime'
 $PidFile    = Join-Path $RuntimeDir 'bridge.pid'
@@ -36,7 +38,7 @@ $StatusFile = Join-Path $RuntimeDir 'status.json'
 $LogFile    = Join-Path $CtiHome 'logs' 'bridge.log'
 $DaemonMjs  = Join-Path $SkillDir 'dist' 'daemon.mjs'
 
-$ServiceName = 'ClaudeToIMBridge'
+$ServiceName = 'LinkCodexToDiscord'
 
 # ── Helpers ──
 
@@ -135,7 +137,7 @@ function Install-WinSWService {
     $nodePath = Get-NodePath
     $xmlPath = Join-Path $SkillDir "$ServiceName.xml"
 
-    # Run as current user so the service can access ~/.claude-to-im and Codex login state
+    # Run as current user so the service can access the bridge home and Codex login state
     $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
     Write-Host "Service will run as: $currentUser"
     $cred = Get-Credential -UserName $currentUser -Message "Enter password for '$currentUser' (required for Windows Service logon)"
@@ -145,8 +147,8 @@ function Install-WinSWService {
     @"
 <service>
   <id>$ServiceName</id>
-  <name>Claude-to-IM Bridge</name>
-  <description>Claude-to-IM bridge daemon</description>
+  <name>Link Codex To Discord</name>
+  <description>Link Codex To Discord daemon</description>
   <executable>$nodePath</executable>
   <arguments>$DaemonMjs</arguments>
   <workingdirectory>$SkillDir</workingdirectory>
@@ -185,7 +187,7 @@ function Install-NSSMService {
     param([string]$NSSMPath)
     $nodePath = Get-NodePath
 
-    # Run as current user so the service can access ~/.claude-to-im and Codex login state
+    # Run as current user so the service can access the bridge home and Codex login state
     $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
     Write-Host "Service will run as: $currentUser"
     $cred = Get-Credential -UserName $currentUser -Message "Enter password for '$currentUser' (required for Windows Service logon)"
@@ -198,7 +200,7 @@ function Install-NSSMService {
     & $NSSMPath set $ServiceName AppStderr $LogFile
     & $NSSMPath set $ServiceName AppStdoutCreationDisposition 4
     & $NSSMPath set $ServiceName AppStderrCreationDisposition 4
-    & $NSSMPath set $ServiceName Description "Claude-to-IM bridge daemon"
+    & $NSSMPath set $ServiceName Description "Link Codex To Discord daemon"
     & $NSSMPath set $ServiceName AppRestartDelay 10000
     & $NSSMPath set $ServiceName AppEnvironmentExtra "USERPROFILE=$env:USERPROFILE" "APPDATA=$env:APPDATA" "LOCALAPPDATA=$env:LOCALAPPDATA" "CTI_HOME=$CtiHome"
 

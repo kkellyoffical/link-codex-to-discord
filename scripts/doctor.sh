@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
-CTI_HOME="$HOME/.claude-to-im"
+APP_NAME="link-codex-to-discord"
+DEFAULT_CTI_HOME="$HOME/.link-codex-to-discord"
+LEGACY_CTI_HOME="$HOME/.claude-to-im"
+if [ -n "${CTI_HOME:-}" ]; then
+  CTI_HOME="$CTI_HOME"
+elif [ -d "$DEFAULT_CTI_HOME" ] || [ ! -d "$LEGACY_CTI_HOME" ]; then
+  CTI_HOME="$DEFAULT_CTI_HOME"
+else
+  CTI_HOME="$LEGACY_CTI_HOME"
+fi
 CONFIG_FILE="$CTI_HOME/config.env"
 PID_FILE="$CTI_HOME/runtime/bridge.pid"
 LOG_FILE="$CTI_HOME/logs/bridge.log"
@@ -39,6 +48,8 @@ get_config() { grep "^$1=" "$CONFIG_FILE" 2>/dev/null | head -1 | cut -d= -f2- |
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 CTI_RUNTIME=$(get_config CTI_RUNTIME)
 CTI_RUNTIME="${CTI_RUNTIME:-claude}"
+echo "Project: $APP_NAME"
+echo "Home: $CTI_HOME"
 echo "Runtime: $CTI_RUNTIME"
 echo ""
 
@@ -167,7 +178,7 @@ if [ "$CTI_RUNTIME" = "claude" ] || [ "$CTI_RUNTIME" = "auto" ]; then
   if [ "$HAS_ANTHROPIC_CONFIG" = "true" ]; then
     check "ANTHROPIC_* vars in config.env (third-party API provider)" 0
 
-    PLIST_FILE="$HOME/Library/LaunchAgents/com.claude-to-im.bridge.plist"
+    PLIST_FILE="$HOME/Library/LaunchAgents/com.link-codex-to-discord.plist"
 
     # On macOS, verify the launchd plist also has the vars
     if [ "$(uname -s)" = "Darwin" ] && [ -f "$PLIST_FILE" ]; then
