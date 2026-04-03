@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.2.1
+
+- polished `/status` into a clearer two-layer status panel with an `Execution` section for shell snapshot and agent activity visibility
+- published the refreshed repository homepage with multilingual README navigation, logo assets, and banner artwork
+
 ## v1.2.0
 
 - moved `/compact` off tmux injection and onto native Codex app-server compaction, removing the detached tmux dependency from the main compact path

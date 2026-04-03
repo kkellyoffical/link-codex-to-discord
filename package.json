@@ -1,6 +1,6 @@
 {
   "name": "link-codex-to-discord",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Deployable Discord bridge daemon for Codex and Claude Code",
   "license": "MIT",
   "type": "module",
