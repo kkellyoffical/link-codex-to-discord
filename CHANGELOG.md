@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.2
+
+- strengthened `/status` execution visibility with a dedicated `Execution` section that now appears before usage and account details
+- added derived shell runtime signals for background activity, including shell state, shell snapshot age, recent terminal activity, and last command
+- added derived collaboration signals from native Codex session events, including active/completed subagent counts, last subagent event, and compaction/interruption totals
+- improved the top-level `/status` overview lines so shell and subagent state are visible without expanding the full panel
+
 ## v1.2.1
 
 - polished `/status` into a clearer two-layer status panel with an `Execution` section for shell snapshot and agent activity visibility
