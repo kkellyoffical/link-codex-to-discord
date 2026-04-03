@@ -16,7 +16,18 @@ Recommended:
 - a dedicated working directory for the bridge
 - a dedicated Discord bot token for this bridge only
 
-## 2. Clone and install
+## 2. Install
+
+Recommended:
+
+```bash
+git clone https://github.com/kkellyoffical/link-codex-to-discord.git
+cd link-codex-to-discord
+npm install
+npm install -g .
+```
+
+Repository workflow:
 
 ```bash
 git clone https://github.com/kkellyoffical/link-codex-to-discord.git
@@ -24,7 +35,7 @@ cd link-codex-to-discord
 npm install
 ```
 
-The deployable runtime is already bundled in `dist/daemon.mjs`.
+The deployable runtime is already bundled in `dist/daemon.mjs`, so a build step is not required for normal deployment.
 
 ## 3. Discord bot setup
 
@@ -41,6 +52,16 @@ Recommended bot permissions:
 Only grant additional permissions if your bridge features actually need them.
 
 ## 4. Runtime configuration
+
+Fastest path:
+
+```bash
+link-codex-to-discord init
+```
+
+This writes `~/.link-codex-to-discord/config.env` and can also install the optional Codex helper skill.
+
+Manual path:
 
 Create the bridge home and config:
 
@@ -66,8 +87,7 @@ Do not commit `config.env`.
 Before launch:
 
 ```bash
-npm run check
-bash scripts/doctor.sh
+link-codex-to-discord doctor
 ```
 
 Useful manual checks:
@@ -89,9 +109,9 @@ npm start
 Managed daemon:
 
 ```bash
-bash scripts/daemon.sh start
-bash scripts/daemon.sh status
-bash scripts/daemon.sh logs 100
+link-codex-to-discord start
+link-codex-to-discord status
+link-codex-to-discord logs 100
 ```
 
 ## 7. Service management

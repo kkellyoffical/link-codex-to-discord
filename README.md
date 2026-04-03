@@ -9,7 +9,7 @@
 <h1 align="center">Link Codex To Discord</h1>
 
 <p align="center">
-  Deployable Discord runtime for <code>Codex</code> and <code>Claude Code</code>, with native session controls, compact support, and production-minded daemon tooling.
+  Installable Discord runtime and CLI for <code>Codex</code> and <code>Claude Code</code>, with native session controls, compact support, and productized daemon tooling.
 </p>
 
 <p align="center">
@@ -37,6 +37,7 @@ This repository packages a Codex-first Discord bridge into a deployable runtime:
 - Native app-server `/compact` flow instead of tmux injection on the main path
 - Session-aware controls like `/status`, `/permissions`, `/log`, `/resume`, and `/cwd`
 - Launchd and supervisor tooling for long-running local deployments
+- A user-facing CLI for install, init, start, stop, logs, and diagnostics
 
 ## Project Map
 
@@ -46,6 +47,7 @@ This repository packages a Codex-first Discord bridge into a deployable runtime:
 | [`scripts/`](./scripts) | Daemon management, diagnostics, supervisors |
 | [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md) | End-to-end deployment steps |
 | [`docs/AI_AGENT_DEPLOYMENT.md`](./docs/AI_AGENT_DEPLOYMENT.md) | Deterministic agent deployment runbook |
+| [`docs/CODEX_INTEGRATION.md`](./docs/CODEX_INTEGRATION.md) | Codex-side skill integration helper |
 | [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) | Runtime behavior and data flow |
 | [`docs/RELEASE.md`](./docs/RELEASE.md) | Release workflow |
 | [`docs/ROADMAP.md`](./docs/ROADMAP.md) | Roadmap |
@@ -54,19 +56,22 @@ This repository packages a Codex-first Discord bridge into a deployable runtime:
 ## Quick Start
 
 ```bash
+git clone https://github.com/kkellyoffical/link-codex-to-discord.git
+cd link-codex-to-discord
 npm install
-mkdir -p ~/.link-codex-to-discord
-cp config.env.example ~/.link-codex-to-discord/config.env
-bash scripts/doctor.sh
-bash scripts/daemon.sh start
+npm install -g .
+link-codex-to-discord init
+link-codex-to-discord doctor
+link-codex-to-discord start
 ```
 
-Then edit `~/.link-codex-to-discord/config.env` with your Discord token, allowlists, runtime, and default working directory.
+The CLI writes `~/.link-codex-to-discord/config.env`, installs optional Codex helper integration, and then manages the bridge for you.
 
 ## Quick Links
 
 - Deployment: [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)
 - AI agent deployment: [docs/AI_AGENT_DEPLOYMENT.md](./docs/AI_AGENT_DEPLOYMENT.md)
+- Codex integration: [docs/CODEX_INTEGRATION.md](./docs/CODEX_INTEGRATION.md)
 - Architecture: [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)
 - Release workflow: [docs/RELEASE.md](./docs/RELEASE.md)
 - Roadmap: [docs/ROADMAP.md](./docs/ROADMAP.md)

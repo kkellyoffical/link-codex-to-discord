@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.2.3
+
+- added a global user-facing CLI:
+  - `link-codex-to-discord init`
+  - `start`
+  - `stop`
+  - `status`
+  - `doctor`
+  - `logs`
+- added an interactive `init` flow to write `config.env` and scaffold the runtime home
+- added `integrate codex` to install a local Codex helper skill for bridge management
+- updated README and deployment docs around the productized CLI-first install flow
+
 ## v1.2.2
 
 - strengthened `/status` execution visibility with a dedicated `Execution` section that now appears before usage and account details

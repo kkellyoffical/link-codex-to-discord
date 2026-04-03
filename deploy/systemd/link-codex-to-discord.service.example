@@ -6,8 +6,8 @@ Wants=network-online.target
 [Service]
 Type=simple
 WorkingDirectory=/opt/link-codex-to-discord
-EnvironmentFile=/opt/link-codex-to-discord/.env
-ExecStart=/usr/bin/env node /opt/link-codex-to-discord/src/index.js
+Environment=CTI_HOME=/opt/link-codex-to-discord/.runtime-home
+ExecStart=/usr/bin/env node /opt/link-codex-to-discord/dist/daemon.mjs
 Restart=on-failure
 RestartSec=3
 

@@ -1,15 +1,19 @@
 {
   "name": "link-codex-to-discord",
-  "version": "1.2.2",
-  "description": "Deployable Discord bridge daemon for Codex and Claude Code",
+  "version": "1.2.3",
+  "description": "User-friendly Discord bridge runtime and CLI for Codex and Claude Code",
   "license": "MIT",
   "type": "module",
   "private": false,
+  "bin": {
+    "link-codex-to-discord": "./bin/link-codex-to-discord.mjs"
+  },
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "start": "node dist/daemon.mjs",
+    "cli": "node bin/link-codex-to-discord.mjs",
     "check": "node --check dist/daemon.mjs",
     "daemon": "bash scripts/daemon.sh",
     "doctor": "bash scripts/doctor.sh",
@@ -24,6 +28,7 @@
     "claude-code"
   ],
   "files": [
+    "bin",
     "dist",
     "docs",
     "scripts",

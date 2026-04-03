@@ -9,14 +9,20 @@
   <array>
     <string>/usr/bin/env</string>
     <string>node</string>
-    <string>/opt/link-codex-to-discord/src/index.js</string>
+    <string>/opt/link-codex-to-discord/dist/daemon.mjs</string>
   </array>
 
   <key>WorkingDirectory</key>
   <string>/opt/link-codex-to-discord</string>
 
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>CTI_HOME</key>
+    <string>/opt/link-codex-to-discord/.runtime-home</string>
+  </dict>
+
   <key>RunAtLoad</key>
-  <true/>
+  <false/>
 
   <key>KeepAlive</key>
   <true/>
